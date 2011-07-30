@@ -7,10 +7,9 @@
 	</tr>
 <% faxes.each do |fax| %>
 	<tr id="fax_<%= fax.id %>" class="<%= (fax.private) ? 'private' : 'public' %>">
-		<td align="center" valign="bottom"><%= access_controls_for_fax(fax) %></td>
-		<td class="filename" valign="top"><%=h fax.filename %></td>
+    <td class="actions" valign="top"><%= actions_for_fax(fax) %></td>
+		<td class="filename" valign="top"><%= link_to fax.filename, fax %></td>
 		<td class="received" valign="top"><%=h fax.created_at.strftime("%I:%M:%S %p (%b %d)") %></td>
-		<td class="actions" valign="top"><%= actions_for_fax(fax) %></td>
 	</tr>
 <% end %>
 </table>

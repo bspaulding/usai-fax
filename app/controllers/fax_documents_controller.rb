@@ -61,6 +61,6 @@ class FaxDocumentsController < ApplicationController
   end
 
   def authenticate_user
-    raise 'Not Authorized' unless [:index, :show, :update_faxes].include? params[:action].to_sym || current_user.is_admin?
+    raise 'Not Authorized' unless (current_user.is_admin? || [:index, :show, :update_faxes].include?(params[:action].to_sym))
   end
 end

@@ -60,6 +60,14 @@ a:hover, a:active {
 	font-size: 0.9em;
 }
 
+#faxes table td.actions {
+  width: 45px;
+}
+
+#faxes table td.actions img {
+  margin-right: 5px;
+}
+
 #spinner {
 	position: absolute;
 	top: 20px;

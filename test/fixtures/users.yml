@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  username: MyString
+  login: MyString
   crypted_password: MyString
   password_salt: MyString
   persistence_token: MyString
@@ -14,7 +14,7 @@ one:
   last_login_ip: MyString
 
 two:
-  username: MyString
+  login: MyString
   crypted_password: MyString
   password_salt: MyString
   persistence_token: MyString

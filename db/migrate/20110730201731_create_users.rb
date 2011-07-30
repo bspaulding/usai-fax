@@ -7,11 +7,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :persistence_token
       t.integer :login_count
       t.integer :failed_login_count
-      t.last_request_at :datetime
-      t.current_login_at :datetime
-      t.last_login_at :datetime
-      t.current_login_ip :string
-      t.last_login_ip :string
+      t.datetime :last_request_at
+      t.datetime :current_login_at
+      t.datetime :last_login_at
+      t.string :current_login_ip
+      t.string :last_login_ip
       t.boolean :is_admin
 
       t.timestamps

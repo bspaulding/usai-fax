@@ -1,8 +1,9 @@
 class FaxDocumentsController < ApplicationController
   before_filter :require_user
-  
+  before_filter :authenticate_user
+
   def index
-  	@faxes = current_user.is_admin? ? FaxDocument.all : FaxDocument.public
+  	@faxes = load_faxes
   end
 
   def show
@@ -22,8 +23,9 @@ class FaxDocumentsController < ApplicationController
 		@fax.private = false
 		@fax.save!
 		
+    faxes = load_faxes
 		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => FaxDocument.all 
+			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
 			page.visual_effect :highlight, "fax_#{@fax.id}"
 		end
 	end
@@ -34,8 +36,9 @@ class FaxDocumentsController < ApplicationController
 		@fax.private = true
 		@fax.save!
 		
+    faxes = load_faxes
 		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => FaxDocument.all 
+			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
 			page.visual_effect :highlight, "fax_#{@fax.id}"
 		end
 	end
@@ -43,9 +46,21 @@ class FaxDocumentsController < ApplicationController
 	# Remote Call - to keep the interface responsive.
 	def update_faxes
 		FaxDocument.update_fax_documents
+
+    faxes = load_faxes
 		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => FaxDocument.all 
+			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
 			page.replace_html 'last_updated_time', Time.now.strftime("%I:%M:%S %p (%b %d)")
 		end
 	end
+
+  private
+
+  def load_faxes
+    current_user.is_admin? ? FaxDocument.all : FaxDocument.public
+  end
+
+  def authenticate_user
+    raise 'Not Authorized' unless [:index, :show, :update_faxes].include? params[:action].to_sym || current_user.is_admin?
+  end
 end

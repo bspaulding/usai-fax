@@ -1,46 +1,16 @@
 <table id="faxes_table">
 	<tr>
-		<% if current_user.is_admin %>
-			<td></td>
-		<% end %>
+		<th></th>
 		<th align="left">Filename</th>
 		<th align="left">Received</th>
-		<% if current_user.is_admin %>
-			<th align="left">Availability</th>
-		<% end %>
+    <th align="left"></th>
 	</tr>
 <% faxes.each do |fax| %>
-	<% if !fax.private || current_user.is_admin && fax.private %>
 	<tr id="fax_<%= fax.id %>" class="<%= (fax.private) ? 'private' : 'public' %>">
-		
-		<% if current_user.is_admin %>
-		<td align="center" valign="bottom">
-			<% if fax.private %>
-			<%= image_tag 'lock.png', :width => "15px", :height => "15px" %>
-			<% end %>
-		</td>
-		<% end %>
-		
+		<td align="center" valign="bottom"><%= access_controls_for_fax(fax) %></td>
 		<td class="filename" valign="top"><%=h fax.filename %></td>
-		
 		<td class="received" valign="top"><%=h fax.created_at.strftime("%I:%M:%S %p (%b %d)") %></td>
-		
-		<% if current_user.is_admin %>
-		<td class="availability" valign="top">
-			<% if(fax.private) %>
-				Private (<%= link_to_remote("Make Public", :url => {:action => "make_public", :id => fax.id}) %>)
-			<% else %>
-				Public (<%= link_to_remote("Make Private", :url => {:action => "make_private", :id => fax.id}) %>)
-			<% end %>
-		</td>
-		<% end %>
-		
-		<td class="download" valign="top"><%= link_to "Download", url_for(:action => "show", :id => fax.id) %></td>
-
-		<% if current_user.is_admin %>
-		<td class="delete" valign="top"><%= link_to "Delete", url_for(:action => "destroy", :id => fax.id), :confirm => "Are you sure you want to permanently delete this document?", :method => :delete %></td>
-		<% end %>
+		<td class="actions" valign="top"><%= actions_for_fax(fax) %></td>
 	</tr>
-	<% end %>
 <% end %>
 </table>

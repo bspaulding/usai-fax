@@ -1,9 +1,5 @@
 # Be sure to restart your server when you modify this file
 
-# Specifies base directory where faxes are stored.
-FAX_BASE_DIRECTORY = "/Faxes" #"/Users/brads/Desktop/ruby_mv/private" #"/Library/Webserver/Documents/"
-#FAX_PRIVATE_DIRECTORY = "/Library/Webserver/Documents/Private"
-
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
 

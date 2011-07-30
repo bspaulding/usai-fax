@@ -1,0 +1,107 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	background-image: url('../images/grad_bg.jpg');
+	background-repeat: repeat-x;
+	
+	font-family: Verdana;
+	font-size: 1em;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 1.2em;
+}
+
+a:link, a:visited {
+	color: #538ff7;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+#wrapper {
+	margin: 0px auto;
+	padding: 25px;
+	
+	width: 1024px;
+}
+
+#logo {
+	margin: 0px auto;
+	padding: 0px;
+	width: 350px;
+}
+
+#faxes .public {
+
+}
+
+#faxes .private {
+	color: #666;
+}
+
+#faxes table {
+	width: 100%;
+}
+
+#faxes table th {
+	
+}
+
+#faxes table td {
+	padding: 5px;
+	font-size: 0.9em;
+}
+
+#spinner {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+#last_updated {
+	position: absolute;
+	top: 20px;	
+	right: 20px;
+	
+	text-align: center;
+	font-size: 0.8em;
+	font-style: italic;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+#last_updated_time {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+
+#update_message {
+	text-align: center;
+	font-size: 0.8em;
+	font-style: italic;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+#login_form {
+	width: 225px;
+	
+	margin: 0px auto;
+	
+	font-size: 0.9em;
+}
+
+#login_form h1 {
+	text-align: center;
+}

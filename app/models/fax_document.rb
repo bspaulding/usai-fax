@@ -1,4 +1,6 @@
 class FaxDocument < ActiveRecord::Base
+
+  named_scope :public, :conditions => { :private => false }
 	
 	# Check the FAX_BASE_DIRECTORY for new faxes and instantiate them.
 	# Deletes files after instantiation.

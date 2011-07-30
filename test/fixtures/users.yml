@@ -1,7 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  login: MyString
+notadmin:
+  login: notadmin
   crypted_password: MyString
   password_salt: MyString
   persistence_token: MyString
@@ -12,9 +12,10 @@ one:
   last_login_at: 2009-11-03 15:05:56
   current_login_ip: MyString
   last_login_ip: MyString
+  is_admin: false
 
-two:
-  login: MyString
+admin:
+  login: admin
   crypted_password: MyString
   password_salt: MyString
   persistence_token: MyString
@@ -25,3 +26,4 @@ two:
   last_login_at: 2009-11-03 15:05:56
   current_login_ip: MyString
   last_login_ip: MyString
+  is_admin: true

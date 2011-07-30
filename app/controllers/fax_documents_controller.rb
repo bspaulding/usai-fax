@@ -2,7 +2,7 @@ class FaxDocumentsController < ApplicationController
   before_filter :require_user
   
   def index
-  	@faxes = FaxDocument.all
+  	@faxes = current_user.is_admin? ? FaxDocument.all : FaxDocument.public
   end
 
   def show

@@ -1,8 +1,28 @@
 require 'test_helper'
 
 class FaxDocumentsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  def setup
+    super
+    
+    @public_fax  = FaxDocument.create!(:filename => 'public_fax.txt',  :private => false)
+    @private_fax = FaxDocument.create!(:filename => 'private_fax.txt', :private => true)
+  end
+
+  test "index sets @faxes to only public is current_user is not admin" do
+    UserSession.create users(:notadmin)
+
+    get :index
+
+    assert  assigns(:faxes).include?( @public_fax  )
+    assert !assigns(:faxes).include?( @private_fax )
+  end
+
+  test "index sets @faxes to all is current_user is not admin" do
+    UserSession.create users(:admin)
+
+    get :index
+
+    assert assigns(:faxes).include?( @public_fax  )
+    assert assigns(:faxes).include?( @private_fax )
   end
 end

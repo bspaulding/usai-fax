@@ -1,22 +1,8 @@
-<%= periodically_call_remote	:url => {:action => "update_faxes"}, 
-															:before => "$('spinner').show()",
-															:success => "$('spinner').hide()" %>
-
-<div id="spinner" style="display:none;">
-	<%= image_tag 'spinner.gif' %> Updating Faxes...
-</div>
-
 <div id="last_updated">
 	<p>
-		<b>Last Updated At:</b> <div id="last_updated_time"><em>Please Wait...</em></div>
+		<%= link_to "Update", update_faxes_fax_documents_path %>
 	</p><p>
-		<%= link_to "Logout", logout_path %>
-	</p>
-</div>
-
-<div id="update_message">
-	<p>
-		Please do not refresh this page. Faxes are updated every 10 seconds.
+		<%= link_to "Logout", destroy_user_session_path %>
 	</p>
 </div>
 

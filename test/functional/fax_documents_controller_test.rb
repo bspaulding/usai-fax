@@ -1,15 +1,13 @@
 require 'test_helper'
 
 class FaxDocumentsControllerTest < ActionController::TestCase
-  def setup
-    super
-    
+  def setup    
     @public_fax  = FaxDocument.create!(:filename => 'public_fax.txt',  :private => false)
     @private_fax = FaxDocument.create!(:filename => 'private_fax.txt', :private => true)
   end
 
   test "index sets @faxes to only public is current_user is not admin" do
-    UserSession.create users(:notadmin)
+    sign_in users(:notadmin)
 
     get :index
 
@@ -18,7 +16,7 @@ class FaxDocumentsControllerTest < ActionController::TestCase
   end
 
   test "index sets @faxes to all is current_user is not admin" do
-    UserSession.create users(:admin)
+    sign_in users(:admin)
 
     get :index
 

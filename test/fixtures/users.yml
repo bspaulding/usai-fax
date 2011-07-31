@@ -1,29 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-notadmin:
-  login: notadmin
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
-  login_count: 1
-  failed_login_count: 1
-  last_request_at: 2009-11-03 15:05:56
-  current_login_at: 2009-11-03 15:05:56
-  last_login_at: 2009-11-03 15:05:56
-  current_login_ip: MyString
-  last_login_ip: MyString
-  is_admin: false
-
-admin:
-  login: admin
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
-  login_count: 1
-  failed_login_count: 1
-  last_request_at: 2009-11-03 15:05:56
-  current_login_at: 2009-11-03 15:05:56
-  last_login_at: 2009-11-03 15:05:56
-  current_login_ip: MyString
-  last_login_ip: MyString
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+admin: 
+  email: admin@usai.net
   is_admin: true
+
+notadmin:
+  email: notadmin@usai.net
+  is_admin: false

@@ -7,13 +7,13 @@ module FaxDocumentsHelper
     unlocked_icon = image_tag 'unlocked.png', :width => "15px", :height => "15px"
 
     if fax.private
-      html += link_to_remote locked_icon,   :url => { :action => "make_public",  :id => fax.id }, :title => 'Make Public'
+      html += link_to locked_icon,   fax_document_make_public_path(fax),  :title => 'Make Public'
     else
-      html += link_to_remote unlocked_icon, :url => { :action => "make_private", :id => fax.id }, :title => 'Make Private'
+      html += link_to unlocked_icon, fax_document_make_private_path(fax), :title => 'Make Private'
     end
 
-    html += link_to image_tag('icon_delete.gif', :title => "Delete"), url_for(:action => "destroy", :id => fax.id), :confirm => "Are you sure you want to permanently delete this document?", :method => :delete if current_user.is_admin?
+    html += link_to image_tag('icon_delete.gif', :title => "Delete"), fax_document_path(fax), :confirm => "Are you sure you want to permanently delete this document?", :method => :delete if current_user.is_admin?
 
-    html
+    html.html_safe
   end
 end

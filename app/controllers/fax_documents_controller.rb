@@ -1,7 +1,6 @@
 class FaxDocumentsController < ApplicationController
-  before_filter :require_user
-  before_filter :authenticate_user
-
+  before_filter :authorize
+    
   def index
   	@faxes = load_faxes
   end
@@ -14,44 +13,33 @@ class FaxDocumentsController < ApplicationController
 	def destroy
 		@fax = FaxDocument.find(params[:id])
 		@fax.destroy
-		redirect_to :action => 'index'
+
+		redirect_to :action => :index
 	end
 	
 	# Remote Call
 	def make_public 
-		@fax = FaxDocument.find(params[:id])
+		@fax = FaxDocument.find(params[:fax_document_id])
 		@fax.private = false
 		@fax.save!
 		
-    faxes = load_faxes
-		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
-			page.visual_effect :highlight, "fax_#{@fax.id}"
-		end
+    redirect_to :action => :index
 	end
 
 	# Remote Call
 	def make_private 
-		@fax = FaxDocument.find(params[:id])
+		@fax = FaxDocument.find(params[:fax_document_id])
 		@fax.private = true
 		@fax.save!
 		
-    faxes = load_faxes
-		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
-			page.visual_effect :highlight, "fax_#{@fax.id}"
-		end
+    redirect_to :action => :index
 	end
 	
 	# Remote Call - to keep the interface responsive.
 	def update_faxes
 		FaxDocument.update_fax_documents
 
-    faxes = load_faxes
-		render :update do |page|
-			page.replace_html 'faxes', :partial => 'faxes', :object => faxes
-			page.replace_html 'last_updated_time', Time.now.strftime("%I:%M:%S %p (%b %d)")
-		end
+    redirect_to :action => :index
 	end
 
   private
@@ -60,7 +48,7 @@ class FaxDocumentsController < ApplicationController
     current_user.is_admin? ? FaxDocument.all : FaxDocument.public
   end
 
-  def authenticate_user
+  def authorize
     raise 'Not Authorized' unless (current_user.is_admin? || [:index, :show, :update_faxes].include?(params[:action].to_sym))
   end
 end
